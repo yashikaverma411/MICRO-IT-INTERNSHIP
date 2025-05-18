@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock-Paper-Scissors Game</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body { background: #000; font-family: 'Orbitron', 'Roboto', Arial, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+    h1 { color: #ffd700; margin-bottom: 8px; font-size: 2.7rem; letter-spacing: 2px; text-shadow: 2px 2px 16px #ffb30055, 0 0 10px #333; margin-top: 30px; font-family: 'Orbitron', Arial, sans-serif; }
+    .instructions { color: #fff; background: #111; border-left: 4px solid #ffd700; padding: 16px 24px; border-radius: 10px; margin: 18px 0 10px 0; font-size: 1.12rem; font-family: 'Roboto', Arial, sans-serif; max-width: 430px; box-shadow: 0 2px 20px #ffd70022; }
+    .scoreboard { display: flex; justify-content: center; gap: 40px; margin: 20px 0; }
+    .score { background: linear-gradient(120deg, #333 60%, #111 100%); border-radius: 15px; padding: 22px 44px; color: #ffd700; font-size: 1.55rem; box-shadow: 2px 2px 10px #00000070; border: 1.5px solid #ffd70077; font-family: 'Orbitron', Arial, sans-serif; text-align: center; min-width: 120px; }
+    .choices { display: flex; justify-content: center; gap: 50px; margin: 34px 0 0 0; }
+    .choice-btn { background: linear-gradient(145deg, #1a1a1a 80%, #222 100%); border: 2px solid #ffd700a6; border-radius: 50%; width: 110px; height: 110px; cursor: pointer; font-size: 3.1rem; box-shadow: 0 4px 18px #ffd70033, 0 2px 8px #00000099; transition: transform 0.11s, box-shadow 0.22s, background 0.22s; display: flex; align-items: center; justify-content: center; color: #fff; position: relative; outline: none; }
+    .choice-btn span { font-size: 2.2rem; display: block; margin-top: 4px; color: #ffd700c7; text-shadow: 0 1px 6px #000, 0 0 2px #ffd70077; }
+    .choice-btn:hover, .choice-btn:focus { transform: scale(1.13); box-shadow: 0 12px 38px #ffd70044, 0 2px 8px #ffd70055; background: linear-gradient(145deg, #222 60%, #333 100%); border-color: #ffd700; }
+    .result { margin: 36px 0 14px; font-size: 2.15rem; font-weight: bold; color: #ffd700; min-height: 36px; text-shadow: 2px 2px 12px #ffd70033, 0 0 4px #111; letter-spacing: 1px; font-family: 'Orbitron', Arial, sans-serif; }
+    .history { background: linear-gradient(120deg, #222 60%, #111 100%); border-radius: 10px; padding: 14px 20px; color: #ffd700b7; min-width: 250px; margin-bottom: 16px; font-size: 1.16rem; font-family: 'Roboto', Arial, sans-serif; border: 1px solid #ffd70038; box-shadow: 0 2px 10px #ffd70011; }
+    .reset-btn { margin-top: 18px; padding: 11px 32px; background: linear-gradient(120deg, #ffd700 75%, #bbaa33 100%); color: #111; border: none; border-radius: 10px; font-size: 1.07rem; font-family: 'Orbitron', Arial, sans-serif; font-weight: bold; cursor: pointer; box-shadow: 0 2px 18px #ffd70022, 0 2px 8px #00000040; transition: background 0.2s, color 0.2s; letter-spacing: 1px; }
+    .reset-btn:hover { background: #fffbe9; color: #ffd700; }
+    @media (max-width: 600px) {
+      .scoreboard { gap: 18px; }
+      .choices { gap: 14px; }
+      .choice-btn { width: 64px; height: 64px; font-size: 1.6rem; }
+      .choice-btn span { font-size: 1.08rem; }
+      .score { padding: 10px 13px; font-size: 1rem; }
+      h1 { font-size: 1.25rem; }
+      .instructions { padding: 8px 10px; font-size: 0.93rem; }
+      .result { font-size: 1.25rem; }
+      .history { font-size: 0.89rem; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+  <div class="instructions">
+    <strong>How to Play:</strong> <br>
+    Choose your move by clicking on <span style="color:#ffd700;">Rock</span>, <span style="color:#ffd700;">Paper</span> or <span style="color:#ffd700;">Scissors</span> below.<br>
+    The computer will pick its move at random.<br>
+    <span style="color:#ffd700;">Rock beats Scissors</span>, <span style="color:#ffd700;">Scissors beats Paper</span>, <span style="color:#ffd700;">Paper beats Rock</span>.<br>
+    Try to beat the computer!
+  </div>
+  <div class="scoreboard">
+    <div class="score" id="player-score">You: 0</div>
+    <div class="score" id="computer-score">Computer: 0</div>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" data-choice="rock" title="Rock">
+      <span>🪨</span>
+      <div style="position:absolute; bottom:7px; left:0; width:100%; text-align:center; font-size:0.95rem; color:#ffd700b7; font-family:'Roboto';">Rock</div>
+    </button>
+    <button class="choice-btn" data-choice="paper" title="Paper">
+      <span>📄</span>
+      <div style="position:absolute; bottom:7px; left:0; width:100%; text-align:center; font-size:0.95rem; color:#ffd700b7; font-family:'Roboto';">Paper</div>
+    </button>
+    <button class="choice-btn" data-choice="scissors" title="Scissors">
+      <span>✂️</span>
+      <div style="position:absolute; bottom:7px; left:0; width:100%; text-align:center; font-size:0.95rem; color:#ffd700b7; font-family:'Roboto';">Scissors</div>
+    </button>
+  </div>
+  <div class="result" id="result"></div>
+  <div class="history" id="history"></div>
+  <button class="reset-btn" onclick="resetGame()">Reset Game</button>
+  <script>
+    // Emojis & Choices
+    const choices = ["rock", "paper", "scissors"];
+    const emojis = { rock: "🪨", paper: "📄", scissors: "✂️" };
+    let playerScore = 0;
+    let computerScore = 0;
+    let historyArr = [];
+
+    function getComputerChoice() {
+      return choices[Math.floor(Math.random() * 3)];
+    }
+    function decideWinner(player, computer) {
+      if (player === computer) return "draw";
+      if (
+        (player === "rock" && computer === "scissors") ||
+        (player === "scissors" && computer === "paper") ||
+        (player === "paper" && computer === "rock")
+      ) return "player";
+      return "computer";
+    }
+    function updateScore() {
+      document.getElementById("player-score").textContent = `You: ${playerScore}`;
+      document.getElementById("computer-score").textContent = `Computer: ${computerScore}`;
+    }
+    function showResult(player, computer, winner) {
+      let result = "";
+      if (winner === "draw") {
+        result = `It's a draw! Both picked ${emojis[player]}`;
+      } else if (winner === "player") {
+        result = `You Win! ${emojis[player]} beats ${emojis[computer]}`;
+      } else {
+        result = `You Lose! ${emojis[computer]} beats ${emojis[player]}`;
+      }
+      document.getElementById("result").textContent = result;
+    }
+    function updateHistory(player, computer, winner) {
+      let text = `You: ${emojis[player]}, Computer: ${emojis[computer]} — `;
+      if (winner === "draw") {
+        text += "Draw";
+      } else if (winner === "player") {
+        text += "You win!";
+      } else {
+        text += "You lose!";
+      }
+      historyArr.unshift(text);
+      if (historyArr.length > 6) historyArr.pop();
+      document.getElementById("history").innerHTML = historyArr.map(h => `<div>${h}</div>`).join('');
+    }
+    document.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const playerChoice = btn.dataset.choice;
+        const computerChoice = getComputerChoice();
+        const winner = decideWinner(playerChoice, computerChoice);
+        if (winner === "player") {
+          playerScore++;
+        }
+        else if (winner === "computer") {
+          computerScore++;
+        }
+        updateScore();
+        showResult(playerChoice, computerChoice, winner);
+        updateHistory(playerChoice, computerChoice, winner);
+      });
+    });
+    function resetGame() {
+      playerScore = 0;
+      computerScore = 0;
+      historyArr = [];
+      updateScore();
+      document.getElementById("result").textContent = "";
+      document.getElementById("history").textContent = "";
+    }
+  </script>
+</body>
+</html>
