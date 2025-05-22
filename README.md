@@ -1,12 +1,7 @@
-I wanted to create a simple game using html, so I decided to make Rock Paper and Scissors game as my project 1. Also,my second project is a stopwatch and clock working together in a pink theme.
+In the realm of web development, I have undertaken two distinct projects that showcase my skills and creativity.
 
-Project 1 : Rock-Paper-Scissors Game
-The Rock-Paper-Scissors game is a simple interactive game where players choose rock, paper, or scissors
-to compete against the computer. The winner is determined based on the classic rules: rock crushes
-scissors, scissors cuts paper, and paper covers rock.
+Project 1: Rock-Paper-Scissors Game
+The Rock-Paper-Scissors game is a straightforward interactive application wherein players select rock, paper, or scissors to compete against the computer. The outcome is determined according to the traditional rules: rock defeats scissors, scissors defeat paper, and paper defeats rock.
 
-Project 2 : Stop Watch / Clock
-A stopwatch/clock application combines the functions of a stopwatch and a clock. It allows users to
-measure elapsed time with start, stop, and reset features, while also displaying the current time. The
-interface typically shows hours, minutes, and seconds, providing a versatile tool for timing activities and
-checking the time simultaneously
+Project 2: Stopwatch and Clock Application
+This application combines the functionalities of a stopwatch and a clock. It enables users to measure elapsed time through start, stop, and reset controls while concurrently displaying the current time. The interface shows hours, minutes, and seconds, providing a practical and versatile tool for timing activities and monitoring the time. The design will incorporate a consistent pink-themed aesthetic.
